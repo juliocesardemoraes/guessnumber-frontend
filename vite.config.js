@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => {
         input: {
           main: resolve(__dirname, "src/index.html"),
           login: resolve(__dirname, "src/login.html"),
+          placar: resolve(__dirname, "src/placar.html"),
         },
       },
     },

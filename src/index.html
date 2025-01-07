@@ -17,15 +17,95 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="h-[100vh]">
-    <h1>Piadas de tiozão</h1>
-    <button onclick="fetchData()">Gerar piada</button>
-    <h2 id="piadaresposta"></h2>
+  <body class="bg-slate-100 min-h-screen w-screen flex flex-col gap-4 pt-4">
+    <ul
+      class="text-sm font-medium text-center text-gray-500 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400 max-w-lg min-w-[300px] w-[50vw] m-auto"
+    >
+      <li class="w-full focus-within:z-10">
+        <a
+          href="/"
+          class="inline-block w-full p-4 text-gray-900 bg-gray-100 border-r border-gray-200 dark:border-gray-700 rounded-s-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
+          aria-current="page"
+          >Jogo</a
+        >
+      </li>
+      <li class="w-full focus-within:z-10">
+        <a
+          href="/placar"
+          class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+          >Placar</a
+        >
+      </li>
+    </ul>
+
+    <header
+      class="bg-white w-[50vw] m-auto rounded-xl drop-shadow-md min-w-[300px] p-8 flex gap-2 justify-center items-center"
+    >
+      <img
+        id="img__picture"
+        class="w-[24px] h-[16px]"
+        src="/place.png"
+        alt="profile picture"
+      />
+      <h1 class="text-slate-600 text-xl font-bold">Júlio Moraes</h1>
+      <h3 class="text-slate-600 text-[14px] font-medium">Pontuação: 11</h3>
+      <h3 class="text-slate-600 text-[14px] font-medium">Tentativas: 25</h3>
+    </header>
+
+    <main
+      class="bg-white w-[50vw] m-auto min-h-[500px] min-w-[300px] rounded-xl drop-shadow-md p-4 md:p-16 flex flex-col gap-6"
+    >
+      <h1 class="text-3xl font-bold text-slate-700 text-center">
+        Adivinhe o número
+      </h1>
+      <h2 class="text-xl font-medium text-slate-700 text-center">
+        Eu estou pensando em um número de 1-100.
+      </h2>
+      <h3 class="text-base font-medium text-slate-400 text-center">
+        Você consegue adivinhar em 10 tentativas?
+      </h3>
+
+      <form class="flex flex-col gap-6" onsubmit="adivinharNumero(event)">
+        <input
+          class="p-4 border border-slate-300 rounded text-center"
+          placeholder="Insira um número"
+          type="number"
+        />
+        <button class="bg-blue-500 text-white p-4 rounded" type="submit">
+          Adivinhar
+        </button>
+      </form>
+
+      <h3 class="text-base font-medium text-slate-400 text-center">
+        Suas Tentativas(Max 10):
+      </h3>
+      <div class="grid grid-cols-5 gap-4">
+        <div class="bg-slate-200 rounded text-center p-4">10</div>
+        <div class="bg-slate-200 rounded text-center p-4">10</div>
+        <div class="bg-slate-200 rounded text-center p-4">10</div>
+        <div class="bg-slate-200 rounded text-center p-4">10</div>
+        <div class="bg-slate-200 rounded text-center p-4">10</div>
+        <div class="bg-slate-200 rounded text-center p-4">10</div>
+      </div>
+
+      <button
+        class="border border-blue-500 text-blue-500 p-4 rounded flex justify-center items-center gap-1"
+        type="submit"
+      >
+        <img class="w-[16px] h-[16px]" src="/refresh.svg" alt="refresh icon" />
+        Reiniciar
+      </button>
+    </main>
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/toastify-js"
     ></script>
+    <script type="module" src="./js/auth.js"></script>
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>

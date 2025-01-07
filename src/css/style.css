@@ -11,3 +11,12 @@ body{
     font-family: "Inter", serif;
 }
 
+
+.toast__error{
+    background: rgb(248, 64, 64) !important;
+}
+
+.toast__success{
+    background: rgb(79, 123, 255) !important;
+    color: #222;
+}

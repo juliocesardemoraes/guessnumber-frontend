@@ -40,7 +40,7 @@ const criarConta = async (event) => {
   });
 
   const responseMessage = await res.json();
-  console.log("RES", responseMessage.user.picture);
+  console.log("RES", responseMessage);
 
   if (res?.status === 200 || res?.status === 201) {
     Toastify({
@@ -55,6 +55,8 @@ const criarConta = async (event) => {
           username,
           password,
           picture: responseMessage.user.picture,
+          score: responseMessage.user.score,
+          tries: responseMessage.user.tries,
         })
       );
     } else {

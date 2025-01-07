@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Javascript module</title>
+    <title>Adivinhe o número - Pagina principal</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,8 +53,12 @@
         alt="profile picture"
       />
       <h1 class="text-slate-600 text-xl font-bold">Júlio Moraes</h1>
-      <h3 class="text-slate-600 text-[14px] font-medium">Pontuação: 11</h3>
-      <h3 class="text-slate-600 text-[14px] font-medium">Tentativas: 25</h3>
+      <h3 class="text-slate-600 text-[14px] font-medium">
+        Pontuação: <span id="profile__score">11</span>
+      </h3>
+      <h3 class="text-slate-600 text-[14px] font-medium">
+        Tentativas: <span id="profile__tries">25</span>
+      </h3>
     </header>
 
     <main
@@ -70,11 +74,13 @@
         Você consegue adivinhar em 10 tentativas?
       </h3>
 
-      <form class="flex flex-col gap-6" onsubmit="adivinharNumero(event)">
+      <form class="flex flex-col gap-6" onsubmit="guessNumber(event)">
         <input
           class="p-4 border border-slate-300 rounded text-center"
           placeholder="Insira um número"
           type="number"
+          name="number"
+          required
         />
         <button class="bg-blue-500 text-white p-4 rounded" type="submit">
           Adivinhar
@@ -84,14 +90,7 @@
       <h3 class="text-base font-medium text-slate-400 text-center">
         Suas Tentativas(Max 10):
       </h3>
-      <div class="grid grid-cols-5 gap-4">
-        <div class="bg-slate-200 rounded text-center p-4">10</div>
-        <div class="bg-slate-200 rounded text-center p-4">10</div>
-        <div class="bg-slate-200 rounded text-center p-4">10</div>
-        <div class="bg-slate-200 rounded text-center p-4">10</div>
-        <div class="bg-slate-200 rounded text-center p-4">10</div>
-        <div class="bg-slate-200 rounded text-center p-4">10</div>
-      </div>
+      <div id="tries__container" class="grid grid-cols-5 gap-4"></div>
 
       <button
         class="border border-blue-500 text-blue-500 p-4 rounded flex justify-center items-center gap-1"

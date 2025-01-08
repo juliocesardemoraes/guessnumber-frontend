@@ -20,3 +20,7 @@ body{
     background: rgb(79, 123, 255) !important;
     color: #222;
 }
+
+.toast__error__less{
+    background: rgb(229, 163, 22) !important;
+}

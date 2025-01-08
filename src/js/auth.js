@@ -2,6 +2,24 @@ const spanPont = document.getElementById("profile__score");
 const spanTries = document.getElementById("profile__tries");
 const h1ProfileName = document.getElementById("profile__name");
 
+const slowNumber = (element, loopSize, speed = 100) => {
+  for (let i = 0; i < loopSize; i++) {
+    setTimeout(() => {
+      element.textContent = i;
+    }, speed * i);
+  }
+};
+
+const slowText = (element, content, speed = 100) => {
+  const splitText = content.split("");
+
+  for (let i = 0; i < splitText.length; i++) {
+    setTimeout(() => {
+      element.textContent += splitText[i];
+    }, speed * i);
+  }
+};
+
 document.addEventListener("DOMContentLoaded", async () => {
   if (!localStorage.getItem("user")) {
     window.location.href = "/login";
@@ -23,7 +41,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const resBody = await res.json();
   localStorage.setItem("user", JSON.stringify(resBody.user));
-  spanPont.textContent = resBody.user.score;
-  spanTries.textContent = resBody.user.tries;
-  h1ProfileName.textContent = resBody.user.username;
+
+  slowNumber(spanPont, resBody.user.score);
+  slowNumber(spanTries, resBody.user.tries, 50);
+  slowText(h1ProfileName, resBody.user.username);
 });

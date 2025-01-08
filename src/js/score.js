@@ -9,7 +9,7 @@ window.onload = async () => {
   const users = resBody.users;
   for (let i = 0; i < users.length; i++) {
     scoreContainer.innerHTML += `
-        <div class="flex gap-8 justify-center items-center">
+        <div class="flex gap-8 justify-between items-center p-1">
           <h1 class="text-3xl font-bold text-slate-700">${i + 1}</h1>
           <div>
             <h2 class="font-base font-bold">${users[i].username}</h2>

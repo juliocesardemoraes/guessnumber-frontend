@@ -10,6 +10,7 @@ let randomNumber = null;
 
 let tries = 0;
 
+let maxTries = 10;
 const untilNumber = 100;
 
 function getRandomInt(max) {
@@ -69,29 +70,55 @@ const guessNumber = async (event) => {
   }
 
   triesContainer.innerHTML += `
-        <div class="bg-slate-200 rounded text-center p-4">${number}</div>
+        <div class="bg-slate-200 rounded text-center pt-4 pb-4">${number}</div>
   `;
+
+  tries++;
+
+  if (tries === maxTries) {
+    console.log("NUMERO MAXIMO DE TENTATIVAS EXCEDIDO!");
+    Toastify({
+      text: "Tentativas esgotadas. Tente novamente ❌",
+      className: "toast__error",
+      duration: 3000,
+    }).showToast();
+
+    const userData = JSON.parse(localStorage.getItem("user"));
+    userData.tries += tries;
+
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    const res = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/user/scoreupdate`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
+
+    reset();
+  }
 
   if (number < randomNumber) {
     // Erro o número é abaixo do esperado
     Toastify({
-      text: "Tente um número maior!",
+      text: "Tente um número maior! ⬆️",
       className: "toast__error",
       duration: 3000,
     }).showToast();
-    tries++;
     return;
   }
 
   if (number > randomNumber) {
     // Erro o número é acima do esperado
     Toastify({
-      text: "Tente um número menor!",
-      className: "toast__error",
+      text: "Tente um número menor! ⬇️",
+      className: "toast__error__less",
       duration: 3000,
     }).showToast();
-    tries++;
-
     return;
   }
 };

@@ -7,9 +7,10 @@ const spanTries = document.getElementById("profile__tries");
 const triesContainer = document.getElementById("tries__container");
 
 let randomNumber = null;
-const untilNumber = 100;
 
 let tries = 0;
+
+const untilNumber = 100;
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max + 1);
@@ -20,19 +21,21 @@ const reset = () => {
   randomNumber = getRandomInt(untilNumber);
   triesContainer.innerHTML = "";
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  spanPont.textContent = user.score;
+  spanTries.textContent = user.tries;
+
   console.log(randomNumber);
 };
 
 window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  spanPont.textContent = user.score;
-  spanTries.textContent = user.tries;
 
   randomNumber = getRandomInt(untilNumber);
   console.log(randomNumber);
 };
 
-const guessNumber = (event) => {
+const guessNumber = async (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
   const number = Number(formData.get("number"));
@@ -44,7 +47,27 @@ const guessNumber = (event) => {
       className: "toast__success",
       duration: 3000,
     }).showToast();
+
+    const userData = JSON.parse(localStorage.getItem("user"));
+    userData.score += 1;
+    userData.tries += tries;
+
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    const res = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/user/scoreupdate`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
+
     reset();
+
+    // Atualizar o score do usuário e tentativas.
     return;
   }
 
@@ -59,6 +82,7 @@ const guessNumber = (event) => {
       className: "toast__error",
       duration: 3000,
     }).showToast();
+    tries++;
     return;
   }
 
@@ -69,6 +93,8 @@ const guessNumber = (event) => {
       className: "toast__error",
       duration: 3000,
     }).showToast();
+    tries++;
+
     return;
   }
 };

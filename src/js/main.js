@@ -24,15 +24,12 @@ const reset = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   spanPont.textContent = user.score;
   spanTries.textContent = user.tries;
-
-  console.log(randomNumber);
 };
 
 window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   randomNumber = getRandomInt(untilNumber);
-  console.log(randomNumber);
 };
 
 const guessNumber = async (event) => {
@@ -100,3 +97,4 @@ const guessNumber = async (event) => {
 };
 
 window.guessNumber = guessNumber;
+window.reset = reset;

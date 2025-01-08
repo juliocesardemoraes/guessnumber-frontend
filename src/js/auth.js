@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   const bodyString = localStorage.getItem("user");
-  console.log(bodyString);
 
   const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/authsign`, {
     method: "POST",
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   const resBody = await res.json();
-  console.log(resBody.user);
   localStorage.setItem("user", JSON.stringify(resBody.user));
   spanPont.textContent = resBody.user.score;
   spanTries.textContent = resBody.user.tries;
